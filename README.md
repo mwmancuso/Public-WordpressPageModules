@@ -95,12 +95,11 @@ Renderers define how the meta fields are displayed in the WP Admin section. When
                         'name' => 'background',
                         'title' => 'Background Image',
                         'renderer' => new Background_Chooser(
-                            'header_background',
-                            'Header Background'
+                            'example_background',
+                            'Example Background'
                         ),
                         'options' => array(
                             'types' => array('image'),
-                            'has_default' => true,
                         ),
                     ),
                 ),
@@ -112,4 +111,18 @@ Renderers define how the meta fields are displayed in the WP Admin section. When
 )
 ```
 
-Taking a look at this, we first see that the first renderer is of type `Type_Select`. This is used when the Table Settings option 'has_types' is true. 
+Taking a look at this, we first see that the first renderer is of type `Type_Select`. This is used when the Table Settings option 'has_types' is true. The type selector renders as a dropdown box in the format of `'value' => 'Display Name'`. Then, the rest of the meta fields' "options" array must have a "types" option, with an array of which type values the field will be shown for. In this case, if the user selects "Title" for the type, only the "Title" meta field will show. If the user selects "Image Background", both meta fields will show.
+
+The next meta field is the "Title" field, which has a simple `Texturized_Text` renderer. The single option for `Texturized_Text` is the placeholder value. The difference between `Texturized_Text` and `Plain_Text` is how the value will be displayed in the template file. If `Texturized_Text`, the WP Texturize pre-processor will be run on the text before it is sent to the template.
+
+The third and final meta field, "Background Image", has the `Background_Chooser` renderer, which has some neat features. It will automatically create a Background Image category for uploads, allow the user to upload backgrounds on the spot, allows the background to be positioned, and allows the user to select previous background images. The "example_background" and "Example Background" refer to the background category's name and display name, respectively.
+
+You can see all of the specific renderers and their settings in `inc/renderers`.
+
+##### For Modules
+Note that since the top-level is a meta, the `example_meta` field will be exported to the template file as a local variable. Thus, in the template file:
+* `$example_meta` will contain all of the nested table data
+* `$example_meta['type']` will contain the type value of the module
+* `$example_meta['title']` will contain the texturized output of the value for this field
+* `$example_meta['background']['id']` will contain the ID, if available, of the selected background image
+* `$example_meta['background']['position']` will contain the position, if available, of the selected background image

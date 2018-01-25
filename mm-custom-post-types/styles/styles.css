@@ -1,1 +1,54 @@
+/* --- SHOW-HIDE SELECTORS --- */
+/* Here, we hide all table rows by default */
+.show-hide-element.hide {
+    display: none;
+}
 
+/* --- SORTABLE LISTS --- */
+/* This prevents multiple `show-none`s from being displayed back to back */
+.show-hide-container.show-none + .show-hide-container.show-none {
+    display: none;
+}
+
+/* Since handles are disabled for `show-none`s, let's gray them out */
+.show-hide-container.show-none > .handle-container {
+    opacity: .5;
+}
+
+/* --- ICON PREVIEWS --- */
+.icon-example {
+    margin-bottom: 10px;
+}
+
+.icon-example-base {
+    display: none;
+}
+
+/* --- BACKGROUND PREVIEWS --- */
+.background-preview-container .background-preview {
+    width: 100%;
+    height: 0;
+    padding-bottom: 30%;
+    margin-bottom: 10px;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.background-preview-container .background-preview.position-center {
+    background-position: center;
+}
+
+.background-preview-container .background-preview.position-top {
+    background-position: top;
+}
+
+.background-preview-container .background-preview.position-bottom {
+    background-position: bottom;
+}
+
+.background-preview-container .background-preview.placeholder {
+    background-image: url(../images/placeholder.png);
+    background-position: center;
+    background-size: auto;
+    background-repeat: repeat;
+}
